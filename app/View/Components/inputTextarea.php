@@ -4,20 +4,22 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class buttonLink extends Component
+class inputTextarea extends Component
 {
 
-    public $link;
-    public $type;
+    public $label;
+    public $name;
+    public $id;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($link, $type)
+    public function __construct($label, $name, $id)
     {
-        $this->link = $link;
-        $this->type = $type;
+        $this->label = $label;
+        $this->name = $name;
+        $this->id = $id;
     }
 
     /**
@@ -27,6 +29,6 @@ class buttonLink extends Component
      */
     public function render()
     {
-        return view('components.button-link');
+        return view('components.input-textarea');
     }
 }

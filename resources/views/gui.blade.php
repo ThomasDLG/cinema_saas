@@ -93,8 +93,30 @@
                 <p class="text-base text-gray-400 my-4">Input type text</p>
                 <div class="col-span-6 sm:col-span-3">
                     <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
-                    <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-border focus:ring-primary-border sm:text-sm">
+                    <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="input-form">
                 </div>
+                <p class="text-base text-gray-400 my-4">Textarea</p>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
+                    <textarea class="
+                    block
+                    w-full
+                    px-3
+                    py-1.5
+                    text-base
+                    font-normal
+                    text-gray-700
+                    bg-white bg-clip-padding
+                    border border-solid border-gray-300
+                    rounded
+                    transition
+                    ease-in-out
+                    m-0
+                    focus:text-gray-700 focus:bg-white focus:border-primary-border focus:ring-primary-border focus:outline-none"
+                    name="message" id="message" cols="30" rows="10"></textarea>
+                </div>
+                <p class="text-base text-gray-400 my-4">Search</p>
+                <div class="liveSearch"></div>
                 <p class="text-base text-gray-400 my-4">Input type checkbox</p>
                 <div class="flex h-5 items-center">
                     <input id="offers" name="offers" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-border focus:ring-primary-border m-2">

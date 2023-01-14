@@ -23,4 +23,7 @@
         background-color: #fff;
         box-shadow: inset 0 -1px 0 rgb(229 231 235);
     }
+    .input-form {
+        @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-border focus:ring-primary-border sm:text-sm;
+    }
 }
