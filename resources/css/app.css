@@ -27,3 +27,7 @@
         @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-border focus:ring-primary-border sm:text-sm;
     }
 }
+.results-list {
+    max-height: 300px;
+    overflow: auto; 
+}

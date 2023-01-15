@@ -1,4 +1,5 @@
 import './bootstrap';
+import 'tw-elements';
 
 import Search from './components/liveSearchAPI';
 

@@ -116,7 +116,36 @@
                     name="message" id="message" cols="30" rows="10"></textarea>
                 </div>
                 <p class="text-base text-gray-400 my-4">Search</p>
-                <div class="liveSearch"></div>
+                <div class="relative rounded-md shadow-sm">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                    <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
+                    </svg>
+                    </div>
+                    <input type="text" class="input-form pl-10" placeholder="Rechercher un film" onChange={handleInputChange}/>
+                </div>
+              <p class="text-base text-gray-400 my-4">Search film API</p>
+                <form action="">
+                  @csrf
+                  <div class="liveSearch"></div>
+                    <div class="mb-3 xl:w-96">
+                      <select class="appearance-none block w-full px-3 py-1.5 text-base font-normal  text-gray-700  bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary-border focus:ring-primary-border focus:outline-none" aria-label="Default select example">
+                          <option selected>Choisir l'heure de diffusion</option>
+                          <option value="10:00:00">10h00</option>
+                          <option value="12:00:00">12h00</option>
+                          <option value="15:00:00">15h00</option>
+                          <option value="17:00:00">17h00</option>
+                          <option value="19:00:00">19h00</option>
+                          <option value="21:00:00">21h00</option>
+                      </select>
+                  </div>
+                  <div class="datepicker relative form-floating mb-3 xl:w-96" data-mdb-toggle-button="false">
+                    <input type="text"
+                      class="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary-border focus:ring-primary-border focus:outline-none"
+                      placeholder="Select a date" data-mdb-toggle="datepicker" />
+                  </div>
+                  <button class="btn-primary" type="submit">Enregistrer</button>
+                </form>
                 <p class="text-base text-gray-400 my-4">Input type checkbox</p>
                 <div class="flex h-5 items-center">
                     <input id="offers" name="offers" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-border focus:ring-primary-border m-2">
@@ -273,4 +302,5 @@
     </div>
 </body>
 @vite('resources/js/app.js')
+@vite('node_modules/flowbite/dist/datepicker.js')
 </html>

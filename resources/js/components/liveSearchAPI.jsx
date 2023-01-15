@@ -28,19 +28,25 @@ const Search = () => {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
     const [selectedMovieId, setSelectedMovieId] = useState('');
+    const [selectedMovieTitle, setSelectedMovieTitle] = useState("");
+    const [showResults, setShowResults] = useState(true);
 
     const handleInputChange = event => {
         setQuery(event.target.value);
 
-        if (!query) {
+        if (!query.trim()) {
             setResults([]);
+            setShowResults(false);
             return;
+        } else {
+            setShowResults(false);
         }
 
         axios
             .get(`https://api.themoviedb.org/3/search/movie`, {
                 params: {
                     api_key: '41d556b9f4525188759fcf95d4685c62',
+                    language: 'fr-FR',
                     query: query
                 }
             })
@@ -52,9 +58,20 @@ const Search = () => {
             });
     };
 
-    const handleMovieClick = movieId => {
+    const handleMovieClick = (movieId, movieTitle) => {
         setSelectedMovieId(movieId);
+        setSelectedMovieTitle(movieTitle);
+        setShowResults(false);
     };
+
+    const renderStars = voteAverage => {
+        const score = Math.round(voteAverage / 2);
+        let stars = '';
+        for (let i = 0; i < score; i++) {
+            stars += '⭐️';
+        }
+        return stars;
+    }
 
     return (
         <div>
@@ -64,25 +81,29 @@ const Search = () => {
                     <path d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
                 </svg>
                 </div>
-                <input type="text" class="input-form pl-10" placeholder="Rechercher un film" onChange={handleInputChange}/>
+                <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-border focus:ring-primary-border sm:text-sm pl-10" placeholder="Rechercher un film" onChange={handleInputChange}/>
             </div>
-            <ul>
+            {(showResults || query.trim()) &&(<ul class="results-list my-4">
                 {results.map(movie => (
-                    <li class="flex justify-start bg-gray-50 mb-4 p-4 h-44 max-h-44 rounded-lg transition ease-in-out hover:bg-gray-100" key={movie.id} onClick={() => handleMovieClick(movie.id)}>
-                        <div class="mr-4"><img src={"https://image.tmdb.org/t/p/w92" + movie.poster_path} alt="" /></div>
+                    <li class="flex justify-start bg-gray-50 mb-4 p-4 h-44 max-h-44 rounded-lg transition ease-in-out hover:bg-gray-100" key={movie.id} onClick={() => handleMovieClick(movie.id, movie.title)}>
+                        <div class="mr-4"><img class="rounded-md" src={"https://image.tmdb.org/t/p/w92" + movie.poster_path} alt="" /></div>
                         <div className="flex flex-col ml-4">
                             <h5>{movie.title}</h5>
                             <p class="text-base">{movie.genre_ids.map(genreId => genreMap[genreId]).join(', ')}</p>
+                            <p class="text-base">{renderStars(movie.vote_average)}</p>
                         </div>
                     </li>
                 ))}
-            </ul>
-            <input type="hidden" name="movie_id" value={selectedMovieId} readOnly />
+            </ul>)}
+            <div>
+                <input type="hidden" name="movie_id" value={selectedMovieId} readOnly />
+                <p class="text-base my-4">{selectedMovieTitle}</p>
+            </div>
         </div>
     );
 };
 
-ReactSupervisor.registerComponent(".liveSearch", Search)
+ReactSupervisor.registerComponent(".liveSearch", Search);
 ReactSupervisor.initialize();
 
 export default Search;
