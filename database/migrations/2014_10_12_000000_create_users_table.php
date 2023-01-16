@@ -13,12 +13,27 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('surname');
+            $table->string('phone')->default('');
+            $table->string('adress')->default('');
+            $table->string('city')->default('');
+            $table->string('zip')->default('');
+            $table->integer('coins')->default(0);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('role')->default('customer');
+            $table->boolean('newsletter')->nullable();
+            $table->unsignedBigInteger('likes_id')->nullable();
+            $table->foreign('likes_id')
+                ->references('id')
+                ->on('likes')
+                ->restrictOnUpdate()
+                ->restrictOnDelete();
             $table->rememberToken();
             $table->timestamps();
         });
