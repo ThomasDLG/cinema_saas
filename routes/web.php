@@ -31,6 +31,7 @@ Route::prefix('dashboard')
 ->group(function () {
     Route::get('/', 'index')->name('dashboard');
     Route::get('/admin', 'admin')->name('admin.dashboard');
+    Route::get('/admin/movies', 'movies')->name('admin.dashboard-movies');
 });
 
 Route::middleware('auth')->group(function () {

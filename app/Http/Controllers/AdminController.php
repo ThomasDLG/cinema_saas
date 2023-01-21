@@ -13,4 +13,8 @@ class AdminController extends Controller
     public function admin() {
         return view('admin.dashboard');
     }
+
+    public function movies() {
+        return view('admin.dashboard-movies');
+    }
 }
