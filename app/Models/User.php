@@ -26,6 +26,7 @@ class User extends Authenticatable
         'zip',
         'email',
         'password',
+        'role',
         'newsletter',
     ];
 

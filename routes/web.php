@@ -31,7 +31,12 @@ Route::prefix('dashboard')
 ->group(function () {
     Route::get('/', 'index')->name('dashboard');
     Route::get('/admin', 'admin')->name('admin.dashboard');
+    // Movies
     Route::get('/admin/movies', 'movies')->name('admin.dashboard-movies');
+    Route::post('/admin/movies/store', 'moviesStore')->name('admin.dashboard-movies-store');
+    Route::get('/admin/movies/delete/{id}', 'moviesDelete')->name('admin.dashboard-movies-delete');
+    // Settings
+    Route::get('/admin/dashboard/settings', 'settings')->name('admin.dashboard-settings');
 });
 
 Route::middleware('auth')->group(function () {

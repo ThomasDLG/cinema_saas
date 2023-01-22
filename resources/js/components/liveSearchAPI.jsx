@@ -29,6 +29,8 @@ const Search = () => {
     const [results, setResults] = useState([]);
     const [selectedMovieId, setSelectedMovieId] = useState('');
     const [selectedMovieTitle, setSelectedMovieTitle] = useState("");
+    const [selectedMoviePosterPath, setSelectedMoviePosterPath] = useState("");
+    const [selectedMovieOverview, setSelectedMovieOverview] = useState("");
     const [showResults, setShowResults] = useState(true);
 
     const handleInputChange = event => {
@@ -58,9 +60,11 @@ const Search = () => {
             });
     };
 
-    const handleMovieClick = (movieId, movieTitle) => {
+    const handleMovieClick = (movieId, movieTitle, moviePosterPath, movieOverview) => {
         setSelectedMovieId(movieId);
         setSelectedMovieTitle(movieTitle);
+        setSelectedMoviePosterPath(moviePosterPath);
+        setSelectedMovieOverview(movieOverview);
         setShowResults(false);
     };
 
@@ -77,7 +81,7 @@ const Search = () => {
         <div>
             <div class="relative rounded-md shadow-sm">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center">
-                <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                <svg className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
                 </svg>
                 </div>
@@ -85,7 +89,7 @@ const Search = () => {
             </div>
             {(showResults || query.trim()) &&(<ul class="results-list my-4">
                 {results.map(movie => (
-                    <li class="flex justify-start bg-gray-50 mb-4 p-4 h-44 max-h-44 rounded-lg transition ease-in-out hover:bg-gray-100" key={movie.id} onClick={() => handleMovieClick(movie.id, movie.title)}>
+                    <li class="flex justify-start bg-gray-50 mb-4 p-4 h-44 max-h-44 rounded-lg transition ease-in-out hover:bg-gray-100" key={movie.id} onClick={() => handleMovieClick(movie.id, movie.title, movie.poster_path, movie.overview)}>
                         <div class="mr-4"><img class="rounded-md" src={"https://image.tmdb.org/t/p/w92" + movie.poster_path} alt="" /></div>
                         <div className="flex flex-col ml-4">
                             <h5>{movie.title}</h5>
@@ -97,6 +101,9 @@ const Search = () => {
             </ul>)}
             <div>
                 <input type="hidden" name="movie_id" value={selectedMovieId} readOnly />
+                <input type="hidden" name="title" value={selectedMovieTitle} readOnly />
+                <input type="hidden" name="poster" value={selectedMoviePosterPath} readOnly />
+                <input type="hidden" name="overview" value={selectedMovieOverview} readOnly />
                 <p class="text-base my-4">{selectedMovieTitle}</p>
             </div>
         </div>

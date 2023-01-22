@@ -11,8 +11,9 @@ class Display extends Model
     use HasFactory;
 
     protected $fillable = [
+        'room_id',
         'date',
-        'hour',
+        'hours_id',
     ];
 
     public function movies() {

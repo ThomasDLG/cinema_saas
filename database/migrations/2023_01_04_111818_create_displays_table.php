@@ -15,12 +15,6 @@ return new class extends Migration
     {
         Schema::create('displays', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('movies_id');
-            $table->foreign('movies_id')
-                ->references('id')
-                ->on('movies')
-                ->restrictOnUpdate()
-                ->restrictOnDelete();
             $table->unsignedBigInteger('rooms_id');
             $table->foreign('rooms_id')
                 ->references('id')
@@ -28,7 +22,12 @@ return new class extends Migration
                 ->restrictOnUpdate()
                 ->restrictOnDelete();
             $table->date('date');
-            $table->time('hour');
+            $table->unsignedBigInteger('hours_id');
+            $table->foreign('hours_id')
+                ->references('id')
+                ->on('hours')
+                ->restrictOnUpdate()
+                ->restrictOnDelete();
             $table->timestamps();
         });
     }
