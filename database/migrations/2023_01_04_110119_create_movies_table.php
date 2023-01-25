@@ -21,6 +21,7 @@ return new class extends Migration
             $table->char('title', 255);
             $table->date('date');
             $table->time('hour');
+            $table->char('room');
             $table->timestamps();
         });
     }

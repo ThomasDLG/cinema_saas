@@ -9,7 +9,7 @@
 </head>
 <body>
         <div class="flex flex-row">
-            <header>
+            <header class="w-full">
                 <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
                     <div class="flex flex-wrap justify-between items-center">
                         <div class="flex justify-start items-center">
@@ -25,15 +25,6 @@
                               <img src="https://flowbite.s3.amazonaws.com/logo.svg" class="mr-3 h-8" alt="FlowBite Logo" />
                               <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
                             </a>
-                            <form action="#" method="GET" class="hidden lg:block lg:pl-2">
-                              <label for="topbar-search" class="sr-only">Search</label>
-                              <div class="relative mt-1 lg:w-96">
-                                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                                  <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-                                </div>
-                                <input type="text" name="email" id="topbar-search" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search">
-                              </div>
-                            </form>
                           </div>
                         <div class="flex items-center lg:order-2">
                             <button type="button" class="hidden sm:inline-flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"><svg aria-hidden="true" class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg> New Widget</button>
@@ -219,7 +210,7 @@
               </header>
         </div>
         <div class="flex flex-row">
-            <div class="basis-3/12">
+            <div>
                 <aside class="w-64" aria-label="Sidebar">
                     <div class="h-screen px-3 py-4 overflow-y-auto rounded bg-gray-50 dark:bg-gray-800">
                        <ul class="space-y-2">
@@ -287,7 +278,7 @@
                     </div>
                  </aside>
             </div>
-                <div class="basis-9/12">
+                <div class="m-4 w-full">
                     <nav class="flex" aria-label="Breadcrumb">
                         <ol class="inline-flex items-center space-x-1 md:space-x-3">
                         <li class="inline-flex items-center">

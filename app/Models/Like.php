@@ -13,6 +13,6 @@ class Like extends Model
         return $this->hasMany(User::class);
     }
     public function movie() {
-        return $this->belongsTo(movie::class);
+        return $this->belongsTo(Movie::class);
     }
 }

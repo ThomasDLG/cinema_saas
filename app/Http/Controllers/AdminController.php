@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
+use App\Models\Hours;
 use App\Models\Rooms;
 use App\Models\Movies;
+use App\Models\Display;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -21,21 +22,29 @@ class AdminController extends Controller
 
         $movies = Movies::all();
         $rooms = Rooms::all();
+        $hours = Hours::all();
 
-        return view('admin.dashboard-movies', ['movies' => $movies, 'rooms' => $rooms]);
+        return view('admin.dashboard-movies', ['movies' => $movies, 'rooms' => $rooms, 'hours' => $hours]);
     }
 
     public function moviesStore(Request $request) {
-        
-        $date = Carbon::createFromFormat('d/m/Y', $request->input('date'))->format('Y-m-d');
-        
+
         Movies::create([
             'movie_id' => $request->input('movie_id'),
             'poster' => $request->input('poster'),
             'overview' => $request->input('overview'),
             'title' => $request->input('title'),
             'hour' => $request->input('hour'),
-            'date' => $date,
+            'date' => $request->input('date'),
+            'room_id' => $request->input('room'),
+        ]);
+
+        $hour_id = Hours::where('hour', '=', $request->input('hour'));
+
+        Display::create([
+            'rooms_id' => $request->input('room'),
+            'date' => $request->input('date'),
+            'hour_id' => $hour_id,
         ]);
 
         return redirect('dashboard/admin/movies');
@@ -50,6 +59,39 @@ class AdminController extends Controller
 
     public function settings() {
 
-        return view('admin.dashboard-settings');
+        $hours = Hours::all();
+        $roomName = Rooms::all();
+
+        return view('admin.dashboard-settings', ['hours' => $hours, 'roomsName' => $roomName]);
+    }
+
+    public function settingsStore(Request $request) {
+
+        if($request->input('hour')) {
+            Hours::create([
+                'hour' => $request->input('hour')
+            ]);
+        }
+        if($request->input('roomName')) {
+            Rooms::create([
+                'name' => $request->input('roomName')
+            ]);
+        }
+
+        return redirect('dashboard/admin/settings');
+    }
+
+    public function settingsDeleteHour($id) {
+
+        Hours::destroy($id);
+
+        return redirect('dashboard/admin/settings');
+    }
+
+    public function settingsDeleteRoom($id) {
+
+        Rooms::destroy($id);
+
+        return redirect('dashboard/admin/settings');
     }
 }

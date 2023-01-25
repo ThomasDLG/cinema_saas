@@ -36,7 +36,10 @@ Route::prefix('dashboard')
     Route::post('/admin/movies/store', 'moviesStore')->name('admin.dashboard-movies-store');
     Route::get('/admin/movies/delete/{id}', 'moviesDelete')->name('admin.dashboard-movies-delete');
     // Settings
-    Route::get('/admin/dashboard/settings', 'settings')->name('admin.dashboard-settings');
+    Route::get('/admin/settings', 'settings')->name('admin.dashboard-settings');
+    Route::post('/admin/settings/store', 'settingsStore')->name('admin.dashboard-settings-store');
+    Route::get('/admin/settings/delete/{id}', 'settingsDeleteHour')->name('admin.dashboard-settings-delete');
+    Route::get('/admin/settings/delete/{id}', 'settingsDeleteRoom')->name('admin.dashboard-settings-delete');
 });
 
 Route::middleware('auth')->group(function () {
