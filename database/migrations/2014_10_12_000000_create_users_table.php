@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('zip')->default('');
             $table->integer('coins')->default(0);
             $table->string('email')->unique();
+            $table->string('avatar')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role')->default('customer');

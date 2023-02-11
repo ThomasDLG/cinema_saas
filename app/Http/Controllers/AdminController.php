@@ -36,7 +36,7 @@ class AdminController extends Controller
             'title' => $request->input('title'),
             'hour' => $request->input('hour'),
             'date' => $request->input('date'),
-            'room_id' => $request->input('room'),
+            'room' => $request->input('room'),
         ]);
 
         $hour_id = Hours::where('hour', '=', $request->input('hour'));

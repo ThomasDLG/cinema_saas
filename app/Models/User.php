@@ -25,6 +25,7 @@ class User extends Authenticatable
         'city',
         'zip',
         'email',
+        'avatar',
         'password',
         'role',
         'newsletter',
@@ -33,6 +34,11 @@ class User extends Authenticatable
     public function likes() {
         return $this->hasMany(Likes::class);
     }
+
+    public function profile()
+{
+    return $this->hasOne(Profile::class);
+}
     /**
      * The attributes that should be hidden for serialization.
      *

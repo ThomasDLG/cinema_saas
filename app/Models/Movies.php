@@ -16,7 +16,7 @@ class Movies extends Model
         'title',
         'date',
         'hour',
-        'room_id',
+        'room',
     ];
     
     public function rooms() {
