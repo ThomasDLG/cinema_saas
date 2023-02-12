@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Hours;
 use App\Models\Rooms;
 use App\Models\Movies;
 use App\Models\Display;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -15,16 +17,36 @@ class AdminController extends Controller
     }
 
     public function admin() {
-        return view('admin.dashboard');
+
+        $id = auth()->user()->id;
+        return view('admin.dashboard', [
+            'links' => [
+                ['title' => 'Dashboard', 'url' => '/dashboard/admin', 'active' => true],
+            ], 'id' => $id,
+        ]);
+    }
+
+    public function profile($id) {
+
+        $user = auth()->user();
+        $id = auth()->user()->id;
+        return view('admin.profile', ['user' => $user, 'id' => $id, 'links' => [
+            ['title' => 'Dashboard', 'url' => '/dashboard/admin'],
+            ['title' => 'Profile', 'url' => '/dashboard/admin/profile', 'active' => true],
+        ],]);
     }
 
     public function movies() {
 
+        $id = auth()->user()->id;
         $movies = Movies::all();
         $rooms = Rooms::all();
         $hours = Hours::all();
 
-        return view('admin.dashboard-movies', ['movies' => $movies, 'rooms' => $rooms, 'hours' => $hours]);
+        return view('admin.dashboard-movies', ['id' => $id, 'movies' => $movies, 'rooms' => $rooms, 'hours' => $hours, 'links' => [
+            ['title' => 'Dashboard', 'url' => '/dashboard/admin'],
+            ['title' => 'Films', 'url' => '/dashboard/admin/movies', 'active' => true],
+        ]]);
     }
 
     public function moviesStore(Request $request) {
@@ -39,12 +61,17 @@ class AdminController extends Controller
             'room' => $request->input('room'),
         ]);
 
-        $hour_id = Hours::where('hour', '=', $request->input('hour'));
+        $result = DB::table('hours')
+        ->select('id')
+        ->where('hour','=', $request->input('hour'))
+        ->first();
+
+        $hour_id = $result->id;
 
         Display::create([
             'rooms_id' => $request->input('room'),
             'date' => $request->input('date'),
-            'hour_id' => $hour_id,
+            'hours_id' => $hour_id,
         ]);
 
         return redirect('dashboard/admin/movies');
@@ -58,11 +85,14 @@ class AdminController extends Controller
     }
 
     public function settings() {
-
+        $id = auth()->user()->id;
         $hours = Hours::all();
         $roomName = Rooms::all();
 
-        return view('admin.dashboard-settings', ['hours' => $hours, 'roomsName' => $roomName]);
+        return view('admin.dashboard-settings', ['id' => $id, 'hours' => $hours, 'roomsName' => $roomName, 'links' => [
+            ['title' => 'Dashboard', 'url' => '/dashboard/admin'],
+            ['title' => 'Paramètres', 'url' => '/dashboard/admin/settings', 'active' => true],
+        ]]);
     }
 
     public function settingsStore(Request $request) {

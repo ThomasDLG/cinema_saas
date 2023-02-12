@@ -11,7 +11,7 @@ class Display extends Model
     use HasFactory;
 
     protected $fillable = [
-        'room_id',
+        'rooms_id',
         'date',
         'hours_id',
     ];
