@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Hours;
 use App\Models\Rooms;
+use App\Models\Banner;
 use App\Models\Movies;
 use App\Models\Display;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 {
@@ -82,6 +84,48 @@ class AdminController extends Controller
         Movies::destroy($id);
 
         return redirect('dashboard/admin/movies');
+    }
+
+    public function appearanceBanner() {
+
+        $banner = Banner::all();
+        $id = auth()->user()->id;
+        return view('admin.appearance-banner', ['banner' => $banner, 'id' => $id, 'links' => [
+            ['title' => 'Dashboard', 'url' => '/dashboard/admin'],
+            ['title' => 'Apparence', 'url' => '#'],
+            ['title' => 'Bannière', 'url' => '/dashboard/admin/appearance/banner', 'active' => true],
+        ]]);
+    }
+
+    public function appearanceBannerEditTitle(Request $request) {
+
+        $title = $request->input('title');
+
+        DB::table('banners')->update(['title' => $title]);
+
+        return redirect('dashboard/admin/appearance/banner');
+    }
+
+    public function appearanceBannerEditDescription(Request $request) {
+
+        $description = $request->input('description');
+
+        DB::table('banners')->update(['description' => $description]);
+
+        return redirect('dashboard/admin/appearance/banner');
+    }
+
+    public function appearanceBannerEditImage(Request $request) {
+
+        if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $destinationPath = public_path('/storage/img');
+        $img = Image::make($image->getRealPath());
+        $img->encode('webp');
+        $img->save($destinationPath . '/banner.webp');
+        };
+
+        return back();
     }
 
     public function settings() {

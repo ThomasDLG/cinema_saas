@@ -63,6 +63,11 @@ Route::prefix('dashboard')
     Route::get('/admin/movies', 'movies')->name('admin.dashboard-movies');
     Route::post('/admin/movies/store', 'moviesStore')->name('admin.dashboard-movies-store');
     Route::get('/admin/movies/delete/{id}', 'moviesDelete')->name('admin.dashboard-movies-delete');
+    // Appearance
+    Route::get('/admin/appearance/banner', 'appearanceBanner')->name('admin.appearance-banner');
+    Route::post('admin/appearance/banner/edit-title', 'appearanceBannerEditTitle')->name('admin.appearance-banner-edit-title');
+    Route::post('admin/appearance/banner/edit-description', 'appearanceBannerEditDescription')->name('admin.appearance-banner-edit-description');
+    Route::post('admin/appearance/banner/edit-image', 'appearanceBannerEditImage')->name('admin.appearance-banner-edit-image');
     // Settings
     Route::get('/admin/settings', 'settings')->name('admin.dashboard-settings');
     Route::post('/admin/settings/store', 'settingsStore')->name('admin.dashboard-settings-store');

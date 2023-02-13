@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
 use App\Models\Rooms;
+use App\Models\Banner;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::factory(1)->create();
+        Banner::factory(1)->create();
         Rooms::factory(5)->create();
     }
 }
