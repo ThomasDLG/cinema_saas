@@ -15,15 +15,15 @@ return new class extends Migration
     {
         Schema::create('displays', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('rooms_id');
-            $table->foreign('rooms_id')
+            $table->unsignedBigInteger('room_id');
+            $table->foreign('room_id')
                 ->references('id')
                 ->on('rooms')
                 ->restrictOnUpdate()
                 ->restrictOnDelete();
             $table->date('date');
-            $table->unsignedBigInteger('hours_id');
-            $table->foreign('hours_id')
+            $table->unsignedBigInteger('hour_id');
+            $table->foreign('hour_id')
                 ->references('id')
                 ->on('hours')
                 ->restrictOnUpdate()

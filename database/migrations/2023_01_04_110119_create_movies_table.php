@@ -21,7 +21,12 @@ return new class extends Migration
             $table->char('title', 255);
             $table->date('date');
             $table->time('hour');
-            $table->char('room');
+            $table->unsignedBigInteger('room_id');
+            $table->foreign('room_id')
+                ->references('id')
+                ->on('rooms')
+                ->restrictOnUpdate()
+                ->restrictOnDelete();
             $table->timestamps();
         });
     }

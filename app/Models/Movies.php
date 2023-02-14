@@ -16,10 +16,10 @@ class Movies extends Model
         'title',
         'date',
         'hour',
-        'room',
+        'room_id',
     ];
     
-    public function rooms() {
+    public function room() {
         return $this->belongsTo(Rooms::class);
     }
 }

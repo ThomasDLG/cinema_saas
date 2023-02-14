@@ -60,7 +60,7 @@ class AdminController extends Controller
             'title' => $request->input('title'),
             'hour' => $request->input('hour'),
             'date' => $request->input('date'),
-            'room' => $request->input('room'),
+            'room_id' => $request->input('room'),
         ]);
 
         $result = DB::table('hours')
@@ -71,9 +71,9 @@ class AdminController extends Controller
         $hour_id = $result->id;
 
         Display::create([
-            'rooms_id' => $request->input('room'),
+            'room_id' => $request->input('room'),
             'date' => $request->input('date'),
-            'hours_id' => $hour_id,
+            'hour_id' => $hour_id,
         ]);
 
         return redirect('dashboard/admin/movies');

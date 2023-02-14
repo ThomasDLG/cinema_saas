@@ -14,27 +14,7 @@
               <form action="{{ route('admin.dashboard-movies-store') }}" method="POST">
                 @csrf
                 <div class="liveSearch"></div>
-                <div class="liveRequest"></div>
-                  <div class="mb-3">
-                    <select name="room" class="appearance-none block w-full px-3 py-1.5 text-base font-normal  text-gray-700  bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary-border focus:ring-primary-border focus:outline-none" aria-label="Default select example">
-                      <option selected>Choisir une salle</option>
-                        @foreach ($rooms as $room)
-                        <option value="{{ $room->id }}">{{ $room->name }}</option>
-                        @endforeach
-                    </select>
-                  </div>
-                  <div class="datepicker relative form-floating mb-3">
-                      <input type="date" name="date" value={input2} onChange={handleInput2Change}
-                      class="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary-border focus:ring-primary-border focus:outline-none"/>
-                  </div>
-                  <div class="mb-3">
-                    <select name="hour" class="appearance-none block w-full px-3 py-1.5 text-base font-normal  text-gray-700  bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary-border focus:ring-primary-border focus:outline-none" aria-label="Default select example">
-                        <option selected>Choisir l'heure de diffusion</option>
-                        @foreach ($hours as $hour)
-                          <option value="{{$hour->hour}}">{{$hour->hour}}</option>
-                        @endforeach
-                    </select>
-                </div>
+                <div class="liveHoursRequest"></div>
                 <button class="btn-primary" type="submit">Enregistrer</button>
               </form>
             </div>
@@ -54,7 +34,7 @@
                         </div>
                         <div class="flex flex-col ml-4">
                             <h6 class="mb-4 leading-normal text-xl font-bold">{{$movie->title}}</h6>
-                            <span class="leading-tight text-md font-semibold">Salle: <span class="font-semibold text-slate-700 sm:ml-2 text-sm"></span></span>
+                            <span class="leading-tight text-md font-semibold">Salle: <span class="font-semibold text-slate-700 sm:ml-2 text-sm">{{$movie->room->name ?? 'None'}}</span></span>
                             <span class="mb-2 leading-tight text-md font-semibold">Date: <span class="text-slate-700 sm:ml-2 text-sm">{{$movie->date}}</span></span>
                             <span class="mb-2 leading-tight text-md font-semibold">Heure: <span class="text-slate-700 sm:ml-2 text-sm">{{$movie->hour}}</span></span>
                         </div>
@@ -64,6 +44,7 @@
                         </div>
                     </li>
                   @endforeach
+
                 </ul>
             </div>
         </div>

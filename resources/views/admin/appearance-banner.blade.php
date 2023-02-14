@@ -21,9 +21,9 @@
                         Réserver maintenant
                     </a>
                 </div>
-                <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+                <div class="hidden lg:mt-0 lg:col-span-5 lg:flex justify-end">
                     <a href="#" class="group flex relative" id="updateProductButton" data-modal-toggle="updateImage">
-                        <img src="/storage/img/banner.webp" alt="mockup">
+                        <img class="w-[250px]" src="/storage/img/banner.webp" alt="mockup">
                     </a>
                 </div>
             </div>
