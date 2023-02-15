@@ -17,6 +17,18 @@
                 <div class="liveHoursRequest"></div>
                 <button class="btn-primary" type="submit">Enregistrer</button>
               </form>
+              @error('title')
+                  <div class="font-bold text-primary-main">Vous devez selectionner un film</div>
+              @enderror
+              @error('room')
+                  <div class="font-bold text-primary-main">Vous devez selectionner une salle</div>
+              @enderror
+              @error('date')
+                  <div class="font-bold text-primary-main">Vous devez selectionner une date</div>
+              @enderror
+              @error('hour')
+                  <div class="font-bold text-primary-main">Vous devez selectionner une heure</div>
+              @enderror
             </div>
         </div>
       </div>

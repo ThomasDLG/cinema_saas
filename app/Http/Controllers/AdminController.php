@@ -53,6 +53,17 @@ class AdminController extends Controller
 
     public function moviesStore(Request $request) {
 
+        $validated = $request->validate([
+            'movie_id' => ['required', 'unique:movies,movie_id', 'max:255'],
+            'poster'   => ['required', 'unique:movies,poster', 'max:255'],
+            'overview' => ['required', 'unique:movies,overview'],
+            'title'    => ['required', 'unique:movies,title', 'max:255'],
+            'room'     => ['required', 'numeric'],
+            'date'     => ['required', 'date'],
+            'hour'     => ['required', 'date_format:H:i:s'],
+        ]);
+
+        if ($validated) {}
         Movies::create([
             'movie_id' => $request->input('movie_id'),
             'poster' => $request->input('poster'),

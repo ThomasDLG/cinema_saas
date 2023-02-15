@@ -65,8 +65,8 @@ const Request = () => {
   return (
     <div>
       <div className="mb-3">
-        <select defaultValue="Choisir une salle" value={selectedRoom || ''} onChange={handleRoomChange} name="room" className="appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary-border focus:ring-primary-border focus:outline-none" aria-label="Default select example">
-          <option>Choisir une salle</option>
+        <select defaultValue="" value={selectedRoom || ''} onChange={handleRoomChange} name="room" className="appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary-border focus:ring-primary-border focus:outline-none" aria-label="Default select example">
+          <option value="null">Choisir une salle</option>
           {rooms.map(room => (
             <option key={room.id} value={room.id}>{room.name}</option>
           ))}
@@ -76,8 +76,8 @@ const Request = () => {
         <input type="date" value={selectedDate || ''} onChange={handleDateChange} name="date" className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary-border focus:ring-primary-border focus:outline-none" />
       </div>
       <div className="mb-3">
-      <select name="hour" className="appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary-border focus:ring-primary-border focus:outline-none" aria-label="Default select example">
-      <option>Choisir une heure</option>
+      <select defaultValue="" name="hour" className="appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary-border focus:ring-primary-border focus:outline-none" aria-label="Default select example">
+      <option value="null" >Choisir une heure</option>
         {hours.map(hour => (
              <option key={hour.id} value={hour.hour} disabled={isHourUnavailable(hour.id)}>{hour.hour}</option>
         ))}
