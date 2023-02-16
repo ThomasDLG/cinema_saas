@@ -20,32 +20,120 @@ class AdminController extends Controller
 
     public function admin() {
 
-        $id = auth()->user()->id;
+        $pseudo = auth()->user()->pseudo;
         return view('admin.dashboard', [
             'links' => [
                 ['title' => 'Dashboard', 'url' => '/dashboard/admin', 'active' => true],
-            ], 'id' => $id,
+            ], 'pseudo' => $pseudo,
         ]);
     }
 
-    public function profile($id) {
+    public function profile($pseudo) {
 
-        $user = auth()->user();
-        $id = auth()->user()->id;
-        return view('admin.profile', ['user' => $user, 'id' => $id, 'links' => [
+        $user = User::wherePseudo($pseudo)->firstOrFail();
+        return view('admin.profile', ['pseudo' => $pseudo, 'user' => $user, 'links' => [
             ['title' => 'Dashboard', 'url' => '/dashboard/admin'],
-            ['title' => 'Profile', 'url' => '/dashboard/admin/profile', 'active' => true],
+            ['title' => 'Profile', 'url' => '/dashboard/admin/profile/'.$pseudo, 'active' => true],
         ],]);
+    }
+
+    public function profilePreferences($pseudo) {
+
+        $user = User::wherePseudo($pseudo)->firstOrFail();
+        return view('admin.profile-preferences', ['pseudo' => $pseudo, 'user' => $user, 'links' => [
+            ['title' => 'Dashboard', 'url' => '/dashboard/admin'],
+            ['title' => 'Profile', 'url' => '/dashboard/admin/profile/'.$pseudo],
+            ['title' => 'Preférences', 'url' => '/dashboard/admin/profile/preferences/'.$pseudo, 'active' => true],
+        ],]);
+    }
+
+    public function profileEdit(Request $request, $pseudo) {
+
+        if($request->input('name')) {
+            $validated =$request->validate([
+                'name' => 'required|string',
+            ]);
+            if($validated) {
+                $user = User::where('pseudo', $pseudo)->first();
+                $user->name = $request->input('name');
+                $user->save();
+                return redirect()->route('admin.profile', ['pseudo' => $pseudo]);
+            }
+        }
+        if($request->input('surname')) {
+            $validated =$request->validate([
+                'surname' => 'required|string',
+            ]);
+            if($validated) {
+                $user = User::where('pseudo', $pseudo)->first();
+                $user->surname = $request->input('surname');
+                $user->save();
+                return redirect()->route('admin.profile', ['pseudo' => $pseudo]);
+            }
+        }
+        if($request->input('pseudo')) {
+            $validated =$request->validate([
+                'pseudo' => 'required|unique:users,pseudo|string|max:24',
+            ]);
+            if($validated) {
+                $user = User::where('pseudo', $pseudo)->first();
+                $user->pseudo = $request->input('pseudo');
+                $user->save();
+                return redirect()->route('admin.profile', ['pseudo' => $user->pseudo]);
+            }
+        }
+        if($request->input('email')) {
+            $validated =$request->validate([
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            ]);
+            $user = User::where('pseudo', $pseudo)->first();
+            $user->email = $request->input('email');
+            $user->save();
+            return redirect()->route('admin.profile', ['pseudo' => $pseudo]);
+        }
+        if($request->input('phone')) {
+            $validated =$request->validate([
+                'phone' => ['required', 'numeric', 'min_digits:10', 'max_digits:10',],
+            ]);
+            if($validated) {
+                $user = User::where('pseudo', $pseudo)->first();
+                $user->phone = $request->input('phone');
+                $user->save();
+                return redirect()->route('admin.profile', ['pseudo' => $pseudo]);
+            }
+        }
+        if($request->input('adress')) {
+            $validated =$request->validate([
+                'adress' => 'required|string|max:255',
+            ]);
+            $user = User::where('pseudo', $pseudo)->first();
+            $user->adress = $request->input('adress');
+            $user->save();
+            return redirect()->route('admin.profile', ['pseudo' => $pseudo]);
+        }
+        if($request->input('city')|$request->input('zip')) {
+            $validated =$request->validate([
+                'city' => 'required|string|max:255',
+                'zip' => 'required|numeric|min_digits:5|max_digits:5',
+            ]);
+            if($validated) {
+                $user = User::where('pseudo', $pseudo)->first();
+                $user->city = $request->input('city');
+                $user->zip = $request->input('zip');
+                $user->save();
+                return redirect()->route('admin.profile', ['pseudo' => $pseudo]);
+            }
+        }
     }
 
     public function movies() {
 
-        $id = auth()->user()->id;
+        $pseudo = auth()->user()->pseudo;
         $movies = Movies::all();
         $rooms = Rooms::all();
         $hours = Hours::all();
 
-        return view('admin.dashboard-movies', ['id' => $id, 'movies' => $movies, 'rooms' => $rooms, 'hours' => $hours, 'links' => [
+        return view('admin.dashboard-movies', ['pseudo' => $pseudo, 'movies' => $movies, 'rooms' => $rooms, 'hours' => $hours, 'links' => [
             ['title' => 'Dashboard', 'url' => '/dashboard/admin'],
             ['title' => 'Films', 'url' => '/dashboard/admin/movies', 'active' => true],
         ]]);
@@ -140,11 +228,11 @@ class AdminController extends Controller
     }
 
     public function settings() {
-        $id = auth()->user()->id;
+        $pseudo = auth()->user()->pseudo;
         $hours = Hours::all();
         $roomName = Rooms::all();
 
-        return view('admin.dashboard-settings', ['id' => $id, 'hours' => $hours, 'roomsName' => $roomName, 'links' => [
+        return view('admin.dashboard-settings', ['pseudo' => $pseudo, 'hours' => $hours, 'roomsName' => $roomName, 'links' => [
             ['title' => 'Dashboard', 'url' => '/dashboard/admin'],
             ['title' => 'Paramètres', 'url' => '/dashboard/admin/settings', 'active' => true],
         ]]);

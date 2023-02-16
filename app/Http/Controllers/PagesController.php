@@ -9,9 +9,10 @@ use Illuminate\Http\Request;
 class PagesController extends Controller
 {
     public function homepage() {
+        $user = auth()->user();
         $banner = Banner::all();
         $movies = Movies::all('poster');
-        return view('welcome', compact('movies', 'banner'));
+        return view('welcome', compact('user','movies', 'banner'));
     }
     public function movies() {
         return view('pages.movies');

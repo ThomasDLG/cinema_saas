@@ -21,6 +21,7 @@ class UserFactory extends Factory
         return [
             'name' => 'Thomas',
             'surname' => 'Delage',
+            'pseudo' => 'thomas007',
             'email' => 'admin@test.com',
             'role' => 'admin',
             'email_verified_at' => now(),

@@ -57,8 +57,9 @@ Route::prefix('dashboard')
 ->group(function () {
     Route::get('/admin', 'admin')->name('admin.dashboard');
     // Profile
-    Route::get('/admin/profile/{id}', 'profile')->name('admin.profile');
-    Route::post('/admin/profile/{id}', 'profileEdit')->name('admin.profile-edit');
+    Route::get('/admin/profile/{pseudo}', 'profile')->name('admin.profile');
+    Route::get('/admin/profile/preferences/{pseudo}', 'profilePreferences')->name('admin.profile-preferences');
+    Route::post('/admin/profile/{pseudo}', 'profileEdit')->name('admin.profile-edit');
     // Movies
     Route::get('/admin/movies', 'movies')->name('admin.dashboard-movies');
     Route::post('/admin/movies/store', 'moviesStore')->name('admin.dashboard-movies-store');

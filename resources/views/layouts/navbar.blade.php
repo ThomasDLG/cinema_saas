@@ -52,12 +52,22 @@
                     @endauth
                 @endif
                 <ul class="dropdown-menu min-w-max absolute hidden  bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none left-auto right-0 top-12" aria-labelledby="dropdownMenuButton2">
-                <li>
-                    <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent  text-gray-700  hover:bg-gray-100" href="#">Action</a>
-                </li>
-                <li>
-                    <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent  text-gray-700  hover:bg-gray-100" href="#">Action</a>
-                </li>
+                @if (Route::has('login'))
+                    @auth
+                        @if ($user->role == 'admin')
+                        <li>
+                            <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent  text-gray-700  hover:bg-gray-100" href="{{route('admin.dashboard')}}">Backoffice</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent  text-gray-700  hover:bg-gray-100" href="{{route('admin.profile', ['pseudo' => $user->pseudo])}}">Mon compte</a>
+                        </li>
+                        @else
+                        <li>
+                            <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent  text-gray-700  hover:bg-gray-100" href="{{route('dashboard')}}">Mon compte</a>
+                        </li>
+                        @endif
+                    @endauth
+                @endif
                 <li>
                     <form class="mb-0" action="{{route('logout')}}" method="post">
                         @csrf

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('surname');
+            $table->string('pseudo');
             $table->string('phone')->default('');
             $table->string('adress')->default('');
             $table->string('city')->default('');

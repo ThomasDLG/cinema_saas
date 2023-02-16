@@ -24,7 +24,7 @@
         box-shadow: inset 0 -1px 0 rgb(229 231 235);
     }
     .input-form {
-        @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-border focus:ring-primary-border sm:text-sm;
+        @apply block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-primary-border focus:ring-primary-border focus:outline-none;
     }
 }
 .results-list {

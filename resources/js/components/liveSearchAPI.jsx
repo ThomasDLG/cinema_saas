@@ -104,7 +104,9 @@ const Search = () => {
                 <input type="hidden" name="title" value={selectedMovieTitle} readOnly />
                 <input type="hidden" name="poster" value={selectedMoviePosterPath} readOnly />
                 <input type="hidden" name="overview" value={selectedMovieOverview} readOnly />
-                <p className="text-base my-4">{selectedMovieTitle}</p>
+                <p className="font-bold text-gray-900 text-xl my-4">
+                    {selectedMovieTitle}
+                </p>
             </div>
         </div>
     );
