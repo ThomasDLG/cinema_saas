@@ -1,6 +1,6 @@
-@extends('layouts.dashboard-admin')
+@extends('admin.layouts.dashboard-admin')
 @section('title')
-    Admin Dashboard - Profile de {{$user->name}}
+    Profile de {{$user->name}}
 @endsection
 
 @section('content')

@@ -1,6 +1,6 @@
-@extends('layouts.dashboard-admin')
+@extends('admin.layouts.dashboard-admin')
 @section('title')
-    Admin Dashboard - Movies
+    Films
 @endsection
 
 @section('content')

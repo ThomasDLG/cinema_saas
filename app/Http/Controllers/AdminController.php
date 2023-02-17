@@ -188,8 +188,8 @@ class AdminController extends Controller
     public function appearanceBanner() {
 
         $banner = Banner::all();
-        $id = auth()->user()->id;
-        return view('admin.appearance-banner', ['banner' => $banner, 'id' => $id, 'links' => [
+        $pseudo = auth()->user()->pseudo;
+        return view('admin.appearance-banner', ['banner' => $banner, 'pseudo' => $pseudo, 'links' => [
             ['title' => 'Dashboard', 'url' => '/dashboard/admin'],
             ['title' => 'Apparence', 'url' => '#'],
             ['title' => 'Bannière', 'url' => '/dashboard/admin/appearance/banner', 'active' => true],
